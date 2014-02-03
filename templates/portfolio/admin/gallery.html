@@ -1,0 +1,17 @@
+{% if is_admin_panel %}
+    {% if 'all' in is_admin_panel or 'add_gallery' in is_admin_panel %}
+        <a href="#"
+           data-original-title="Добавить новую галерею"
+           data-button="data_button_is_admin_panel_gallery"
+           id="portfolio-to_form_add_gallery:{{ data.id }}"
+           class="btn btn-mini btn-info admin_button">
+             Добавить новую галерею
+        </a>
+        <script type="text/javascript">
+            var data_button_is_admin_panel_gallery = [
+                {name: 'Сохранить', attr:'type="submit" name="save"', class:'btn-primary'},
+                {name: 'Применить', attr:'type="submit" name="aply"', class:'btn-warning'}
+            ]
+        </script>
+    {% endif %}
+{% endif %}

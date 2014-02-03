@@ -1,0 +1,50 @@
+{% csrf_token %}
+<div class='notifications top-right'></div>
+<input name="id" value="{% if data.id > 0 %}{{ data.id }}{% else %}0{% endif %}" type="hidden">
+<input name="function_event" value="{{ function_event }}" type="hidden">
+
+
+<div class="control-group">
+    <label class="control-label" >Заголовок: </label>
+    <div class="controls">
+        <input
+                type="text"
+                name="name"
+                class="input-xlarge"
+                placeholder="Заголовок"
+                data-rule-required="true"
+                data-rule-maxlength="255"
+                value="{{ data.name }}">
+    </div>
+</div>
+<!--
+<div class="well well-small">
+    <ul class="nav nav-list">
+        <li class="nav-header">Связать услугу с работами</li>
+        {% for portfolio in portfolios %}
+            <li class="portfolios{% if portfolio.id in curents or portfolio.id in data.data%} active{% endif %}"><a class="portfolio" id="portfolio_{{ portfolio.id }}" href="#">{{ portfolio.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<textarea class="hidden" id="portfolios" name="portfolios"></textarea>
+-->
+
+<script type="text/javascript">
+
+    var errors = null;
+    {% if errors %}
+        errors = {
+            messages: [],
+            style: '{{ style }}'
+        };
+
+        {% for error in errors %}
+            errors.messages.push('{{ error }}');
+        {% endfor %}
+
+    {% endif %}
+</script>
+
+
+

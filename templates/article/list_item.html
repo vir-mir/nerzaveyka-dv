@@ -1,0 +1,33 @@
+{% extends "daughter.html" %}
+{% load article_filters %}
+
+{% block title %}Интересные статьи | ООО «Нержавейка ДВ»{% endblock %}
+{% block keywords %}Интересные статьи | ООО «Нержавейка ДВ»{% endblock %}
+{% block description %}Интересные статьи, статьи про цветной метал{% endblock %}
+
+{% block content %}
+    <ul class="breadcrumb">
+        <li><a href="/">Главная</a> <span class="divider">/</span></li>
+        <li class="active">Статьи</li>
+    </ul>
+
+    {% include 'article/admin/main.html' %}
+
+    {% for item in paginator.object_list %}
+
+        <div class="row-fluid">
+            <h2><a href="/article/{{ item.url }}/">{{ item.name }}</a></h2>
+            {{ item.text|replace_cut_post:item.url|safe  }}
+            {% include 'article/admin/item.html' %}
+        </div>
+        {% if not forloop.last %}
+            <hr>
+        {% endif %}
+
+    {% empty %}
+
+    {% endfor %}
+
+    {% include 'site/paginator.html' %}
+
+{% endblock %}

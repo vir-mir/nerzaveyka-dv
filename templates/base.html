@@ -1,0 +1,154 @@
+{% load portfolio_tags %}
+{% load types_services_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <title>{% block title %}ООО «Нержавейка ДВ» | Изготовление конструкций из нержавеющей стали Хабаровск{% endblock %}</title>
+    <meta name="keywords" content="{% block keywords %}Изготовление конструкций из нержавеющей стали,нержавеющая сталь, цветной метал, цветной лом, сварочные работы по цветному металу{% endblock %}" />
+    <meta name="description" content="{% block description %}Изготовление конструкций из нержавеющей стали, цветного и черного метала Хабаровск{% endblock %}" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/bootstrap-lightbox.min.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/bootstrap-notify.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/styles/alert-notification-animations.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/styles/alert-bangtidy.css" rel="stylesheet" media="screen">
+    <link href="/static/bootstrap/css/styles/alert-blackgloss.css" rel="stylesheet" media="screen">
+    {% if is_admin_panel %}
+        <link href="/static/bootstrap/css/bootstrap-switch.css" rel="stylesheet" media="screen">
+        <link href="/static/bootstrap/css/bootstrap-wysihtml5.css" rel="stylesheet" media="screen">
+    {% endif %}
+    <link href="/static/bootstrap/css/main.css" rel="stylesheet" media="screen">
+
+</head>
+<body>
+<div id="header_bg"></div>
+{% block center_bg %}{% endblock %}
+<div id="menu_bg"></div>
+<div id="site">
+
+    <div id="header" class="row-fluid">
+        <div class="span4 head_hr">
+            <a href="/" title="ООО «Нержавейка ДВ»"><img src="/static/tem/logo.jpg" alt="ООО «Нержавейка ДВ»"></a>
+        </div>
+        <div class="span5 head_hr relative">
+            <div class="contat_head">
+                Контакты и схема проезда<br>
+                {% include "site/contacts.html" %}
+            </div>
+            <a class="region" href="#">работаем в 10 городах</a>
+        </div>
+        <div class="span3">
+            <p class="phone"><small>+7 (914)</small> 405-82-95</p>
+            <a href="#" class="fos fos_click"></a>
+        </div>
+
+        {% include 'site/menu.html' %}
+
+
+        {% block gallery %}
+        {% endblock %}
+
+    </div>
+
+
+    {% block center_bg_text %}{% endblock %}
+
+
+    <div id="content">
+        <div class="row-fluid">
+            <div class="span9">
+
+                {% block content %}{% endblock %}
+
+            </div>
+            <div class="span3">
+
+                {% block right_site_bar %}
+
+                    <div class="right-block">
+                        <h3>Виды услуг:</h3>
+                        {% main_types_services_fn request %}
+
+                        <a href="#" class="all_services pull-right">Показать все услуги</a>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="right-block">
+                        <h3>Наши работы:</h3>
+                        {% main_list_portfolio_fn 4 %} <br>
+                        <a href="/portfolio/" class="pull-right">Все работы >>></a>
+                        <div class="clearfix"></div>
+                    </div>
+
+                {% endblock %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="footer">
+    <div id="center_bg_b"></div>
+    <div id="center_bg_b2"></div>
+    <div id="center_bg_b3"></div>
+    <div id="center_bg_b4"></div>
+    <div id="center_bg_b5">
+		<div id="site_f">
+			<div class="f">
+				&copy; ООО «Нержавейка ДВ» 2012 -  {% now "Y" %}г.
+			</div>
+			
+			<ul id="men_f">
+				<li class="men-li"><a class="men-a" href="/">Главная</a></li>
+				<li class="men-li-dec">|</li>
+				<li class="men-li"><a class="men-a" href="/portfolio/">Виды работ</a></li>
+				<li class="men-li-dec">|</li>
+				<li class="men-li"><a class="men-a" href="/article/">Статьи</a></li>
+				<li class="men-li-dec">|</li>
+				<li class="last men-li"><a class="men-a" href="/company/">О компании</a></li>
+			</ul>
+			
+			<a href="/" style="position: absolute;left: 452px;top: 64px;" title="ООО «Нержавейка ДВ»">
+			<img src="/static/tem/logo.jpg" class="img-polaroid img-rounded" alt="ООО «Нержавейка ДВ»" style="height: 88px;"></a>
+			
+			<div class="vir-mir">
+				<a href="http://blog.vir-mir.ru/page/autor/">Сайт разработан vir-mir</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="body_fos" class="hidden">
+    {% include 'fos/form_feedback.html' %}
+</div>
+
+<div id="callback_click" class="hidden">
+    {% include 'fos/form_callback.html' %}
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap-lightbox.min.js"></script>
+<script src="/static/bootstrap/js/prettify.js"></script>
+<script src="/static/bootstrap/js/bootstrap-notify.js"></script>
+{% if is_admin_panel %}
+    <script src="/static/bootstrap/js/bootstrap-switch.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap-datetimepicker.js"></script>
+    <script src="/static/bootstrap/js/wysihtml5-0.3.0.js"></script>
+    <script src="/static/bootstrap/js/bootstrap-wysihtml5-0.0.2.js"></script>
+    <script src="/static/bootstrap/js/jquery.validate.js"></script>
+    <script src="/static/bootstrap/js/jquery.validate.bootstrap.js"></script>
+    <script src="/static/bootstrap/js/uploads.js"></script>
+    <script src="/static/admin/js/main.js"></script>
+{% endif %}
+<script src="/static/bootstrap/js/main.js"></script>
+</body>
+</html>
+

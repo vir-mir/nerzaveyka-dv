@@ -1,0 +1,65 @@
+{% extends "daughter.html" %}
+{% load portfolio_filters %}
+
+{% block title %}{{ item.seo.title }} | ООО «Нержавейка ДВ»{% endblock %}
+{% block keywords %}{{ item.seo.keywords }} | ООО «Нержавейка ДВ»{% endblock %}
+{% block description %}{{ item.seo.description }}{% endblock %}
+
+{% block content %}
+
+    <ul class="breadcrumb">
+        <li><a href="/">Главная</a> <span class="divider">/</span></li>
+        <li><a href="/portfolio/">Виды работ</a> <span class="divider">/</span></li>
+        <li class="active">{{ item.name }}</li>
+    </ul>
+
+    <div class="row-fluid">
+        <h2>{{ item.name }}</h2>
+        {{ item.text|replace_cut|safe  }}
+        {% include 'portfolio/admin/item.html' %}
+        <br>
+
+        {% if item.gallery and item.gallery_is_item %}
+            {% for gallery in item.gallery.all %}
+                {% if gallery.active %}
+                        <hr>
+                        <h4>{{ gallery.name }}:</h4>
+                        {% for img in gallery.images.all %}
+                            {% if forloop.first %}
+                                <div class="row-fluid thumbnails">
+                            {% endif %}
+                            <div class="span3">
+                                <a target="_blank" href="/media{{ img.src }}" class="thumbnail">
+                                    <img style="max-height: 150px" src="/media{{ img.src_small }}" alt="{{ img.alt }}">
+                                </a>
+                            </div>
+
+                            {% if not forloop.last and forloop.counter|divisibleby:"4" %}
+                                </div><br><div class="row-fluid thumbnails">
+                            {% endif %}
+                            {% if forloop.last %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <br>
+        <p>
+            <small class="muted">
+                <em>
+                    Просмотров: {{ item.count_views }}
+                </em>
+            </small>
+
+            <small class="offset1 muted">
+                <em>
+                    Дата: {{ item.dd_creation|date:"d F Y" }}
+                </em>
+            </small>
+        </p>
+    </div>
+
+{% endblock %}

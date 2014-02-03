@@ -1,0 +1,28 @@
+{% if is_admin_panel %}
+    {% if 'all' in is_admin_panel or 'change_item' in is_admin_panel %}
+        <a href="#"
+           data-original-title="Редактировать услугу"
+           data-button="data_types_services_sbutton_is_admin_panel"
+           id="types_services-to_form_edit_item:{{ service.id }}"
+           class="btn btn-mini btn-info admin_button">
+            Редактировать услугу
+        </a>
+        <script type="text/javascript">
+            var data_types_services_sbutton_is_admin_panel = [
+                {name: 'Сохранить', attr:'type="submit" name="save"', class:'btn-primary'},
+                {name: 'Применить', attr:'type="submit" name="aply"', class:'btn-warning'}
+            ]
+        </script>
+    {% endif %}
+
+    {% if 'all' in is_admin_panel or 'delete_item' in is_admin_panel %}
+        <a href="#"
+           data-original-title="Удалить услугу"
+           model='types_services'
+           function_event="delete_item"
+           id="{{ service.id }}"
+           class="btn btn-mini btn-warning admin_button_set">
+            Удалить услугу
+        </a>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,23 @@
+{% load article_filters %}
+
+<div id="gallery">
+
+    {% for article in slide_article %}
+
+        <div class="gallery-content act" id="g-{{ forloop.counter }}">
+            <a href="/article/{{ article.data.url }}"><img src="/media{{ article.img.src }}" alt="{{ article.img.alt }}" /></a>
+            <div class="gallery-text">
+                <div style="overflow: hidden;height: 85px;">
+                    {{ article.data.text|replace_cut|safe }}
+                </div>
+            </div>
+            <a href="/article/{{ article.data.url }}" class="gallery-href"></a>
+        </div>
+
+    {% endfor %}
+</div>
+<div id="gallery-men">
+    {% for article in slide_article %}
+        <a href="#" class="gallery-men-item {% if forloop.first %} act{% endif %}" id="gitem-{{ forloop.counter }}">{{ article.data.name }}</a>
+    {% endfor %}
+</div>

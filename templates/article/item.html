@@ -1,0 +1,36 @@
+{% extends "daughter.html" %}
+{% load article_filters %}
+
+{% block title %}{{ item.seo.title }} | ООО «Нержавейка ДВ»{% endblock %}
+{% block keywords %}{{ item.seo.keywords }} | ООО «Нержавейка ДВ»{% endblock %}
+{% block description %}{{ item.seo.description }}{% endblock %}
+
+{% block content %}
+
+    <ul class="breadcrumb">
+        <li><a href="/">Главная</a> <span class="divider">/</span></li>
+        <li><a href="/article/">Статьи</a> <span class="divider">/</span></li>
+        <li class="active">{{ item.name }}</li>
+    </ul>
+
+    <div class="row-fluid">
+        <h2>{{ item.name }}</h2>
+        {{ item.text|replace_cut|safe  }}
+        {% include 'article/admin/item.html' %}
+        <br>
+        <p>
+            <small class="muted">
+                <em>
+                    Просмотров: {{ item.count_views }}
+                </em>
+            </small>
+
+            <small class="offset1 muted">
+                <em>
+                    Дата: {{ item.dd_creation|date:"d F Y" }}
+                </em>
+            </small>
+        </p>
+    </div>
+
+{% endblock %}

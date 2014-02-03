@@ -1,0 +1,36 @@
+<div id="ymaps-map-id_136080589760712799484" style="width: 740px; height: 300px;"></div>
+<div style="width: 740px; text-align: right;"><a style="display: none; color: #1a3dc1; font: 13px Arial, Helvetica, sans-serif;" href="http://api.yandex.ru/maps/tools/constructor/index.xml" target="_blank">ООО "Нержавейка-ДВ"</a></div>
+<script type="text/javascript">// <![CDATA[
+function fid_136080589760712799484(ymaps) {
+    var map = new ymaps.Map("ymaps-map-id_136080589760712799484", {
+        center: [135.11685050784058, 48.424389140664736],
+        zoom: 16,
+        type: "yandex#map"
+    });
+    map.controls
+            .add("zoomControl")
+            .add("mapTools")
+            .add(new ymaps.control.TypeSelector(["yandex#map", "yandex#satellite", "yandex#hybrid", "yandex#publicMap"]));
+    map.geoObjects
+            .add(new ymaps.Placemark([135.11773770362555, 48.42564777854509], {
+                balloonContent: 'ООО "Нержавейка-ДВ"<br />т. 8-914-405-82-95'
+            }, {
+                preset: "twirl#lightblueDotIcon"
+            }))
+            .add(new ymaps.Polyline([
+                [135.11670773536386, 48.4228192206669],
+                [135.1177591612977, 48.4250043476595],
+                [135.11824117226814, 48.42577618140226],
+                [135.11760817094063, 48.42584044743091],
+                [135.11764035744878, 48.42556910142049]
+            ], {
+                balloonContent: "Схема проезда"
+            }, {
+                strokeColor: "ff0000",
+                strokeWidth: 5,
+                strokeOpacity: 0.8
+            }));
+};
+// ]]></script>
+<script src="http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&amp;coordorder=longlat&amp;load=package.full&amp;wizard=constructor&amp;onload=fid_136080589760712799484" type="text/javascript"></script>
+            

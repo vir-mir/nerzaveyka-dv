@@ -1,0 +1,28 @@
+{% csrf_token %}
+
+<div class="row-fluid">
+    <div class="span3 text-right">
+        ФИО:
+    </div>
+    <div class="span9">
+        <input type="text" class="span12" name="fio" value="{{ fos.fio }}" placeholder="Введите ваше Ф.И.О">
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span3 text-right">
+        E-mail:
+    </div>
+    <div class="span9">
+        <input type="text" class="span12" name="email" value="{{ fos.email }}" placeholder="Введите ваш E-mail">
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span3 text-right">
+        Вопрос:
+    </div>
+    <div class="span9">
+        <textarea rows="7" class="span12" name="text" placeholder="Введите ваш вопрос">{{ fos.text }}</textarea>
+    </div>
+</div>

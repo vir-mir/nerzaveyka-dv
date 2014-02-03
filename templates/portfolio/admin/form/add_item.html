@@ -1,0 +1,230 @@
+{% csrf_token %}
+<div class='notifications top-right'></div>
+<input name="id" value="{% if data.id > 0 %}{{ data.id }}{% else %}0{% endif %}" type="hidden">
+<input name="function_event" value="{{ function_event }}" type="hidden">
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Основное</a></li>
+        {% if data.id and data.id > 0 %}
+            <li><a href="#tab2" data-toggle="tab">SEO</a></li>
+        {% endif %}
+        {% if data.id and data.id > 0 %}
+            <li><a href="#tab663" data-toggle="tab">Галерея</a></li>
+        {% endif %}
+        {% if data.id and data.id > 0 %}
+            <li><a href="#tab664" data-toggle="tab">Виды услуг</a></li>
+        {% endif %}
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                    <label class="control-label" >Заголовок: </label>
+                    <div class="controls">
+                        <input
+                                type="text"
+                                name="name"
+                                class="input-xlarge"
+                                placeholder="Заголовок"
+                                data-rule-required="true"
+                                data-rule-maxlength="255"
+                                value="{{ data.name }}">
+                    </div>
+                </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Ссылка: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="url"
+                                    data-rule-maxlength="255"
+                                    class="input-xlarge"
+                                    placeholder="Ссылка"
+                                    value="{{ data.url }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Количество просмотров: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="count_views"
+                                    class="input-xlarge"
+                                    data-rule-required="true"
+                                    data-rule-number="true"
+                                    data-rule-maxlength="11"
+                                    placeholder="Количество просмотров"
+                                    value="{% if data.count_views %}{{ data.count_views }}{% else %}0{% endif %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Сортировка: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="order"
+                                    class="input-xlarge"
+                                    data-rule-number="true"
+                                    data-rule-maxlength="11"
+                                    placeholder="Сортировка"
+                                    value="{% if data.order %}{{ data.order }}{% else %}0{% endif %}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span1">
+                    <label class="control-label"  for="active">Активный: </label>
+                </div>
+                <div class="span2">
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="toggle-button make-switch switch-mini" data-on="success" data-off="danger">
+                                <input type="checkbox" id="active" name="active" {% if data.active > 0 %}checked {% endif %}value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                    <label class="control-label"  for="gallery_is_item">Прикрепить галлерею: </label>
+                </div>
+                <div class="span2">
+                    <div class="control-group">
+                        <div class="controls">
+                            <div class="toggle-button make-switch switch-mini" data-on="success" data-off="danger">
+                                <input type="checkbox" id="gallery_is_item" name="gallery_is_item" {% if data.gallery_is_item > 0 %}checked {% endif %}value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Описание: </label>
+                <div class="controls">
+                    <div class="toggle-button make-switch switch-small" data-on="success" data-off="danger">
+                        <textarea name="text" style="height: 300px;" class="span8 wysihtml5Cut">{{ data.text }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="tab-pane" id="tab2">
+            <input name="seo_id" value="{% if data.seo_id > 0 %}{{ data.seo_id }}{% else %}0{% endif %}" type="hidden">
+            <div class="control-group">
+                <label class="control-label" >Title: </label>
+                <div class="controls">
+                    <input
+                            type="text"
+                            name="title"
+                            class="input-xlarge"
+                            placeholder="Title"
+                            data-rule-maxlength="255"
+                            value="{% if data.seo.title %}{{ data.seo.title }}{% endif %}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >Keywords: </label>
+                <div class="controls">
+                    <input
+                            type="text"
+                            name="keywords"
+                            class="input-xlarge"
+                            placeholder="Keywords"
+                            data-rule-maxlength="255"
+                            value="{% if data.seo.keywords %}{{ data.seo.keywords }}{% endif %}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >Description: </label>
+                <div class="controls">
+                    <input
+                            type="text"
+                            name="description"
+                            class="input-xlarge"
+                            placeholder="Description"
+                            data-rule-maxlength="255"
+                            value="{% if data.seo.description %}{{ data.seo.description }}{% endif %}">
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab663">
+            {% include 'portfolio/admin/gallery.html' %}
+            <div class="clearfix"></div><br>
+
+            <div class="row-fluid">
+                {% for gallery in data.gallery.all %}
+
+                    {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+                        </div><div class="row-fluid">
+                    {% endif %}
+
+                    <div class="span4">
+                        <div class="alert alert-block center">
+                            <h5>{{ gallery.name }} <small class="muted">({{ gallery.images.count }})</small></h5>
+                            {% if gallery.main_image %}
+                                <img style="max-height: 195px;" src="/media{{ gallery.main_image.src_small }}" alt="gallery.main_image.alt" class="img-rounded">
+                            {% else %}
+                                <img src="/static/tem/logo.jpg" alt="Нету картинки" class="img-polaroid">
+                            {% endif %}
+                        </div>
+                        <div class="well well-small">
+                            {% include 'portfolio/admin/item_gallery_item.html' %}
+                        </div>
+                    </div>
+
+                {% empty %}
+                    <p>Нет созданых галлерей!</p>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+
+        <div class="tab-pane" id="tab664">
+            <textarea class="hidden" name="portfolios" id="portfolios">{{ all_items_portfolio|join:',' }}</textarea>
+            <ul class="nav nav-list">
+                {% for type_service in type_services %}
+                    <li class="portfolios{% if type_service.id in all_items_portfolio %} active{% endif %} "><a href="#" class="portfolio" id="portfolio_{{ type_service.id }}"><i class="icon-tag"></i> {{ type_service.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var errors = null;
+    {% if errors %}
+        errors = {
+            messages: [],
+            style: '{{ style }}'
+        };
+
+        {% for error in errors %}
+            errors.messages.push('{{ error }}');
+        {% endfor %}
+
+    {% endif %}
+</script>
+
+
+

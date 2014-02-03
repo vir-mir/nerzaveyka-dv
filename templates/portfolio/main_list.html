@@ -1,0 +1,16 @@
+{% for item_right in main_list_portfolio %}
+    {% if forloop.first %}
+        <div class="row-fluid thumbnails">
+    {% endif %}
+    <div class="span6">
+        <a class="thumbnail" href="/portfolio/{{ item_right.url }}/">
+            <img src="/media{{ item_right.src_small }}" alt="{{ item_right.name }}">
+        </a>
+    </div>
+    {% if not forloop.last and forloop.counter|divisibleby:"2" %}
+        </div><br><div class="row-fluid thumbnails">
+    {% endif %}
+    {% if forloop.last %}
+        </div>
+    {% endif %}
+{% endfor %}

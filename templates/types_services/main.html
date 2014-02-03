@@ -1,0 +1,15 @@
+{% load types_services_filters %}
+{% include 'types_services/admin/main.html' %}
+
+<ul class="nav nav-list">
+    {% for service in list_services %}
+        <li{% if forloop.counter > 20 %} class="hidden"{% endif %}>
+            {% if service.portfolios.count > 0 %}
+                <a href="/portfolio/?filret={{ service.portfolios.all|join_id:',' }}"><i class="icon-tag"></i> {{ service.name }}</a>
+            {% else %}
+                <i class="icon-tag"></i> {{ service.name }}
+            {% endif %}
+            {% include 'types_services/admin/item.html' %}
+        </li>
+    {% endfor %}
+</ul>

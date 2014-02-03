@@ -1,0 +1,185 @@
+{% csrf_token %}
+
+<div class='notifications top-right'></div>
+<input name="id" id="id" value="{% if data.id > 0 %}{{ data.id }}{% else %}0{% endif %}" type="hidden">
+<input name="id_item" value="{{ id_item }}" type="hidden">
+<input name="function_event" value="{{ function_event }}" type="hidden">
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Основное</a></li>
+        {% if data.id != '0' and data.id > 0 %}
+            <li><a href="#tab2" data-toggle="tab">Загрузить картинки</a></li>
+        {% endif %}
+        {% if data.images.count > 0 %}
+            <li><a href="#tab22" data-toggle="tab">Картинки</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Заголовок: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="name"
+                                    class="input-xlarge"
+                                    placeholder="Заголовок"
+                                    data-rule-required="true"
+                                    data-rule-maxlength="255"
+                                    value="{{ data.name }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label"  for="ratio">Сохранять пропорции: </label>
+                        <div class="controls">
+                            <div class="toggle-button make-switch switch-mini" data-on="success" data-off="danger">
+                                <input type="checkbox" id="ratio" name="ratio" {% if data.ratio > 0 %}checked {% endif %}value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label"  for="active">Активная галерея: </label>
+                        <div class="controls">
+                            <div class="toggle-button make-switch switch-mini" data-on="success" data-off="danger">
+                                <input type="checkbox" id="active" name="active" {% if data.active > 0 %}checked {% endif %}value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Ширина превью: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="width_prev"
+                                    class="input-xlarge"
+                                    placeholder="Ширина превью"
+                                    data-rule-number="true"
+                                    data-rule-maxlength="11"
+                                    value="{% if data.width_prev %}{{ data.width_prev }}{% else %}350{% endif %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Высота превью: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="height_prev"
+                                    class="input-xlarge"
+                                    placeholder="Высота превью"
+                                    data-rule-number="true"
+                                    data-rule-maxlength="11"
+                                    value="{% if data.height_prev %}{{ data.height_prev }}{% else %}0{% endif %}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Ширина: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="width"
+                                    class="input-xlarge"
+                                    placeholder="Ширина"
+                                    data-rule-number="true"
+                                    data-rule-maxlength="11"
+                                    value="{% if data.width %}{{ data.width }}{% else %}1000{% endif %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label" >Высота: </label>
+                        <div class="controls">
+                            <input
+                                    type="text"
+                                    name="height"
+                                    class="input-xlarge"
+                                    placeholder="Высота"
+                                    data-rule-number="true"
+                                    data-rule-maxlength="11"
+                                    value="{% if data.height %}{{ data.height }}{% else %}0{% endif %}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane active" id="tab2">
+            <input type="file" name="file_upload" id="file_upload" />
+            <input type="hidden" name="uploads_module" id="uploads_module" value="portfolio" />
+        </div>
+
+        <div class="tab-pane" id="tab22">
+            <div class="row-fluid thumbnails" style="margin-left: 0px">
+                {% for image in data.images.all %}
+                    {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+                        </div><br><div class="row-fluid thumbnails" style="margin-left: 0px">
+                    {% endif %}
+                    <div class="span4 img-admin">
+                        <a href="" class="thumbnail">
+                            <img style="max-height: 195px;" src="/media{{ image.src_small }}" alt="{{ image.alt }}">
+                        </a>
+                        <div class="aply">
+                            <a href="#"
+                               id="gallery_{{ data.id }}_{{ image.id }}"
+                               model="portfolio"
+                               function_event='aply_gallery'
+                               style="{% if data.main_image_id == image.id %}display: inline-block !important;visibility: visible !important;{% endif %}"
+                               class="hidden admin_button_set btn btn-primary btn-mini">
+                                <i class="icon-ok icon-white"></i>
+                            </a>
+                            <a href="#"
+                               id="image_{{ image.id }}"
+                               model="portfolio"
+                               function_event='delete_image'
+                               class="hidden admin_button_set btn btn-danger btn-mini">
+                                <i class="icon-remove icon-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<script type="text/javascript">
+    var errors = null;
+    {% if errors %}
+        errors = {
+            messages: [],
+            style: '{{ style }}'
+        };
+
+        {% for error in errors %}
+            errors.messages.push('{{ error }}');
+        {% endfor %}
+
+    {% endif %}
+</script>
+

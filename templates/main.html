@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load article_tags %}
+
+{% block center_bg %}
+    <div id="center_bg"></div>
+    <div id="center_bg2"></div>
+    <div id="hr_content"></div>
+{% endblock %}
+
+{% block center_bg_text %}
+    <div id="center_bg_v">
+        <p>Компания ООО "Нержавейка ДВ" готова выполнить работу любой сложности, при этом даже самые хрупкие металлы будут обработаны качественно и точно. Наша компания стремится к прочному и долгосрочному сотрудничеству, твердо выполняем свои обязательства. Мы предлагает свои услуги не только в нашем городе, но и по всему <strong>Дальнему Востоку</strong></p>
+    </div>
+{% endblock %}
+
+{% block gallery %}
+    {% slide_article_fn 4 %}
+{% endblock %}

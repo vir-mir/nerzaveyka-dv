@@ -1,0 +1,30 @@
+{% if is_admin_panel %}
+
+    {% if 'all' in is_admin_panel or 'change_item' in is_admin_panel %}
+        <a href="#"
+           data-original-title="Редактировать галлерею"
+           data-button="data_button_is_admin_panel"
+           id="article-to_form_edit_gallery:{{ gallery.id }}"
+           class="btn btn-mini btn-info admin_button">
+            Редактировать
+        </a>
+        <script type="text/javascript">
+            var data_button_is_admin_panel = [
+                {name: 'Сохранить', attr:'type="submit" name="save"', class:'btn-primary'},
+                {name: 'Применить', attr:'type="submit" name="aply"', class:'btn-warning'}
+            ]
+        </script>
+    {% endif %}
+
+    {% if 'all' in is_admin_panel or 'delete_item' in is_admin_panel %}
+        <a href="#"
+           data-original-title="Удалить галлерею"
+           model='article'
+           function_event="delete_gallery"
+           id="{{ gallery.id }}"
+           class="btn btn-mini btn-warning admin_button_set">
+            Удалить
+        </a>
+    {% endif %}
+
+{% endif %}

@@ -1,0 +1,43 @@
+{% extends "daughter.html" %}
+{% load portfolio_filters %}
+
+{% block title %}Интересные статьи | ООО «Нержавейка ДВ»{% endblock %}
+{% block keywords %}Интересные статьи | ООО «Нержавейка ДВ»{% endblock %}
+{% block description %}Интересные статьи, статьи про цветной метал{% endblock %}
+
+{% block content %}
+    <ul class="breadcrumb">
+        <li><a href="/">Главная</a> <span class="divider">/</span></li>
+        <li class="active">Виды работ</li>
+    </ul>
+    {% include 'portfolio/admin/main.html' %}
+
+    {% for item in paginator.object_list %}
+
+        <div class="row-fluid">
+            <h2><a href="/portfolio/{{ item.url }}/">{{ item.name }}</a></h2>
+            {% if item.gallery and item.gallery_is_item %}
+                {% for img in item.gallery.all %}
+                    {% if img.main_image and img.active %}
+                        <div class="span3 thumbnails" style="margin-right: 10px">
+                            <a href="/portfolio/{{ item.url }}/" class="thumbnail">
+                                <img src="/media{{ img.main_image.src_small }}" alt="{{ img.main_image.alt }}">
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {{ item.text|replace_cut_post:item.url|safe  }}
+            {% include 'portfolio/admin/item.html' %}
+        </div>
+        {% if not forloop.last %}
+            <hr>
+        {% endif %}
+
+    {% empty %}
+
+    {% endfor %}
+
+    {% include 'site/paginator.html' %}
+
+{% endblock %}

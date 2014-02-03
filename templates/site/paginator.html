@@ -1,0 +1,7 @@
+<div class="clearfix"></div>
+<br />
+<br />
+{% if paginator and paginator.count > paginator.per_page %}
+    <div class="text-center">{% include "paginator.html" %}</div>
+	<br clear="all">
+{% endif %}
